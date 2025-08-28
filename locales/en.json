@@ -1,0 +1,16 @@
+{
+  "settings": {
+    "title": "Velux Settings",
+    "subtitle": "Please log in"
+  },
+  "form": {
+    "address": {
+      "label": "Host (IP Address/Hostname)",
+      "placeholder": "Enter host"
+    },
+    "password": {
+      "label": "Password",
+      "placeholder": "Enter password"
+    }
+  }
+}
