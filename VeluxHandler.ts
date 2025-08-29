@@ -23,6 +23,7 @@ class VeluxHandler {
     }
 
     async connect() {
+        this.app.log("Velux connecting");
         const connectionLostTrigger = this.app.homey.flow.getTriggerCard('connection-lost');
 
         const address = this.app.homey.settings.get("address");
@@ -30,8 +31,9 @@ class VeluxHandler {
         if (!address || !password) throw new Error("Missing Velux controller settings");
         this.conn = new Connection(address);
         try {
-            await this.conn.loginAsync(password);
+            await this.conn.loginAsync(password, 5);
             this.conn?.startKeepAlive();
+            this.app.log("Velux connected");
         } catch (err) {
             this.app.log("Velux login failed");
             await connectionLostTrigger.trigger();
@@ -47,12 +49,13 @@ class VeluxHandler {
 
 
     async stop() {
+        this.app.log("Velux stopping");
         this.conn?.stopKeepAlive();
         await this.conn?.logoutAsync();
     }
 
     getProductByNodeID(nodeID: number): Product | undefined {
-        if (!this.products) return undefined;        
+        if (!this.products) return undefined;
         return this.products.Products.find((product: Product) => product.NodeID === nodeID);
     }
 }

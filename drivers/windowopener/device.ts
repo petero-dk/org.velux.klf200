@@ -1,21 +1,22 @@
 import Homey from 'homey';
-import { Product } from 'klf-200-api';
+import { Product, RunStatus, StatusReply } from 'klf-200-api';
 import VeluxHandler from '../../VeluxHandler';
-const MyApp = require('../../app');
+const VeluxApp = require('../../app');
 
 module.exports = class WindowOpenerDevice extends Homey.Device {
 
 
   private product: Product | undefined;
+  private tempPosition: number | undefined;
 
   /**
    * onInit is called when the device is initialized.
    */
   async onInit() {
-    this.log('MyDevice has been initialized');
+    this.log('Velux Window has been initialized');
 
 
-    const app = this.homey.app as InstanceType<typeof MyApp>;
+    const app = this.homey.app as InstanceType<typeof VeluxApp>;
     const veluxHandler: VeluxHandler | null = app.veluxHandler;
 
     var data = this.getData();
@@ -26,9 +27,28 @@ module.exports = class WindowOpenerDevice extends Homey.Device {
 
     this.product?.propertyChangedEvent.on((property) => {
       this.log('Property changed', property.propertyName, property.propertyValue);
-      if (property.propertyName === 'CurrentPosition') {
-        this.log('Setting value', 'windowcoverings_set', property.propertyValue);
-        this.setCapabilityValue('windowcoverings_set', property.propertyValue).catch(this.error);
+
+      switch (property.propertyName) {
+        case 'CurrentPosition':
+          this.tempPosition = undefined;
+          this.log('Setting value', 'windowcoverings_set', property.propertyValue);
+          this.setCapabilityValue('windowcoverings_set', property.propertyValue).catch(this.error);
+          break;
+        case 'TargetPosition':
+          this.tempPosition = property.propertyValue;
+        case 'RunStatus':
+          this.setCapabilityValue('alarm_running', property.propertyValue != RunStatus.ExecutionCompleted).catch(this.error);
+        case 'StatusReply':
+          this.setCapabilityValue('alarm_raining', property.propertyValue == StatusReply.CommandOverruled).catch(this.error);
+          if (property.propertyValue == StatusReply.CommandOverruled) {
+            this.setCapabilityValue('alarm_running', true).catch(this.error);
+            // It is raining, and if the window is already at the limit then it will not resend current position.
+            setTimeout(() => {
+              if (this.tempPosition) {
+                this.setCapabilityValue('windowcoverings_set', this.tempPosition).catch(this.error);
+              }
+            }, 200);
+          }
       }
     });
     
@@ -44,7 +64,7 @@ module.exports = class WindowOpenerDevice extends Homey.Device {
    * onAdded is called when the user adds the device, called just after pairing.
    */
   async onAdded() {
-    this.log('MyDevice has been added');
+    this.log('Velux Window has been added');
   }
 
   /**
@@ -64,7 +84,7 @@ module.exports = class WindowOpenerDevice extends Homey.Device {
     newSettings: { [key: string]: boolean | string | number | undefined | null };
     changedKeys: string[];
   }): Promise<string | void> {
-    this.log("MyDevice settings where changed");
+    this.log("Velux Window settings where changed");
   }
 
   /**
@@ -73,14 +93,14 @@ module.exports = class WindowOpenerDevice extends Homey.Device {
    * @param {string} name The new name
    */
   async onRenamed(name: string) {
-    this.log('MyDevice was renamed');
+    this.log('Velux Window was renamed');
   }
 
   /**
    * onDeleted is called when the user deleted the device.
    */
   async onDeleted() {
-    this.log('MyDevice has been deleted');
+    this.log('Velux Window  has been deleted');
   }
 
 };

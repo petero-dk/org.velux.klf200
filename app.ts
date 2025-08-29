@@ -3,14 +3,14 @@
 import Homey from 'homey';
 import VeluxHandler from './VeluxHandler';
 
-module.exports = class MyApp extends Homey.App {
+module.exports = class VeluxApp extends Homey.App {
   veluxHandler: VeluxHandler | null = null;
 
   /**
    * onInit is called when the app is initialized.
    */
   async onInit() {
-    this.log('MyApp has been initialized');
+    this.log('VeluxApp has been initialized');
     this.veluxHandler = new VeluxHandler(this);
     try {
       await this.veluxHandler.init();
@@ -21,7 +21,7 @@ module.exports = class MyApp extends Homey.App {
   }
 
   async onUninit() {
-    this.log('MyApp is being uninitialized');
+    this.log('VeluxApp is being uninitialized');
     await this.veluxHandler?.stop();
   }
 }

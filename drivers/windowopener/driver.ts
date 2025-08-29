@@ -1,8 +1,8 @@
 
 import Homey from 'homey';
-import { Connection, Products, Product, ActuatorType } from "klf-200-api";
+import { Product, ActuatorType } from "klf-200-api";
 import VeluxHandler from '../../VeluxHandler';
-const MyApp = require('../../app');
+const VeluxApp = require('../../app');
 
 module.exports = class WindowOpenerDriver extends Homey.Driver {
 
@@ -19,7 +19,7 @@ module.exports = class WindowOpenerDriver extends Homey.Driver {
    */
   async onPairListDevices() {
     this.log('MyDriver onPairListDevices called');
-    const app = this.homey.app as InstanceType<typeof MyApp>;
+    const app = this.homey.app as InstanceType<typeof VeluxApp>;
     const veluxHandler: VeluxHandler | null = app.veluxHandler;
     if (!veluxHandler) {
       throw new Error('VeluxHandler not initialized');
@@ -33,7 +33,7 @@ module.exports = class WindowOpenerDriver extends Homey.Driver {
       data: {
         id: product.NodeID,
       },
-      capabilities: product.SubType == 1 ? ["windowcoverings_set", "measure_rain"] : ["windowcoverings_set"],
+      capabilities: product.SubType == 1 ? ["windowcoverings_set", "alarm_raining", "alarm_running"] : ["windowcoverings_set", "alarm_running"],
     }));
   }
 
