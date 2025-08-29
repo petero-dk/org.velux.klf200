@@ -57,7 +57,8 @@
       },
       "class": "windowcoverings",
       "capabilities": [
-        "windowcoverings_set"
+        "windowcoverings_set",
+        "alarm_running"
       ],
       "platforms": [
         "local"
