@@ -3,6 +3,7 @@
     "en": "Window"
   },
   "class": "windowcoverings",
+  "connectivity": ["lan"],
   "capabilities": [
     "windowcoverings_set", "alarm_running"
   ],

@@ -1,5 +1,5 @@
 {
-  "name": "org.obel.velux",
+  "name": "org.velux.klf200",
   "version": "1.0.0",
   "scripts": {
     "build": "tsc",

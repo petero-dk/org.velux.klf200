@@ -1,5 +1,5 @@
 {
-  "id": "org.obel.velux",
+  "id": "org.velux.klf200",
   "version": "1.0.0",
   "compatibility": ">=12.4.0",
   "sdk": 3,
@@ -22,7 +22,20 @@
     "xlarge": "/assets/images/xlarge.png"
   },
   "author": {
-    "name": "Peter Obel",
-    "email": "***REMOVED***"
-  }
+    "name": "Peter Obel"
+  },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "zealofzebras"
+      }
+    }
+  },
+  "bugs": {
+    "url": "https://github.com/petero-dk/org.velux.klf200/issues"
+  },
+  "brandColor" : "#ee0000",
+  "homeyCommunityTopicId": 142411,
+  "source": "https://github.com/petero-dk/org.velux.klf200",
+  "support": "https://community.homey.app/t/app-pro-velux-via-klf-200/142411"
 }
