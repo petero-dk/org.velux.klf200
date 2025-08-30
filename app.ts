@@ -13,7 +13,6 @@ module.exports = class VeluxApp extends Homey.App {
    */
   async onInit() {
     this.homeyLog = new Log({ homey: this.homey });
-    this.homeyLog.captureMessage("test message");
     this.log('VeluxApp has been initialized');
     try {
       this.veluxHandler = new VeluxHandler(this);

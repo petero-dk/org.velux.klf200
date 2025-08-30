@@ -4,6 +4,6 @@
   "getable": true,
   "setable": false,
   "uiComponent": "sensor",
-  "uiQuickAction": true,
-  "icon": "/assets/raining.svg"
+  "uiQuickAction": false,
+  "icon": "assets/raining.svg"
 }
