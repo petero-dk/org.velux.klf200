@@ -2,17 +2,21 @@
 
 import Homey from 'homey';
 import VeluxHandler from './VeluxHandler';
+const { Log } = require('homey-log');
 
 module.exports = class VeluxApp extends Homey.App {
   veluxHandler: VeluxHandler | null = null;
+  homeyLog: any;
 
   /**
    * onInit is called when the app is initialized.
    */
   async onInit() {
+    this.homeyLog = new Log({ homey: this.homey });
+    this.homeyLog.captureMessage("test message");
     this.log('VeluxApp has been initialized');
-    this.veluxHandler = new VeluxHandler(this);
     try {
+      this.veluxHandler = new VeluxHandler(this);
       await this.veluxHandler.init();
       this.log('VeluxHandler initialized and keep-alive started');
     } catch (err) {

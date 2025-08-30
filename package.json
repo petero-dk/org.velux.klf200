@@ -14,6 +14,8 @@
     "typescript": "^5.9.2"
   },
   "dependencies": {
+    "debug": "^4.4.1",
+    "homey-log": "^2.1.0",
     "klf-200-api": "^6.0.0"
   }
 }
