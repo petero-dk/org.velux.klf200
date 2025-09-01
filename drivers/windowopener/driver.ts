@@ -10,7 +10,7 @@ module.exports = class WindowOpenerDriver extends Homey.Driver {
    * onInit is called when the driver is initialized.
    */
   async onInit() {
-    this.log('MyDriver has been initialized');
+    this.log('Window has been initialized');
   }
 
   /**
@@ -18,7 +18,7 @@ module.exports = class WindowOpenerDriver extends Homey.Driver {
    * This should return an array with the data of devices that are available for pairing.
    */
   async onPairListDevices() {
-    this.log('MyDriver onPairListDevices called');
+    this.log('Window onPairListDevices called');
     const app = this.homey.app as InstanceType<typeof VeluxApp>;
     const veluxHandler: VeluxHandler | null = app.veluxHandler;
     if (!veluxHandler) {
