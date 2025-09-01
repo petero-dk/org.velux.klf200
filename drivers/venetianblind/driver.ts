@@ -4,13 +4,13 @@ import VeluxHandler from '../../VeluxHandler';
 
 const VeluxApp = require('../../app');
 
-module.exports = class WindowOpenerDriver extends Homey.Driver {
+module.exports = class VenetianBlindDriver extends Homey.Driver {
 
   /**
    * onInit is called when the driver is initialized.
    */
   async onInit() {
-    this.log('Window has been initialized');
+    this.log('VenetianBlind has been initialized');
   }
 
   /**
@@ -18,7 +18,7 @@ module.exports = class WindowOpenerDriver extends Homey.Driver {
    * This should return an array with the data of devices that are available for pairing.
    */
   async onPairListDevices() {
-    this.log('Window onPairListDevices called');
+    this.log('VenetianBlind onPairListDevices called');
     const app = this.homey.app as InstanceType<typeof VeluxApp>;
     const { veluxHandler } = app;
     if (!veluxHandler) {
@@ -28,12 +28,12 @@ module.exports = class WindowOpenerDriver extends Homey.Driver {
     if (!(veluxHandler as any)['products']) {
       await veluxHandler.connect();
     }
-    return (veluxHandler as any)['products'].Products.filter((product: Product) => product.TypeID == ActuatorType.WindowOpener).map((product: Product) => ({
+    return (veluxHandler as any)['products'].Products.filter((product: Product) => product.TypeID === ActuatorType.VenetianBlind).map((product: Product) => ({
       name: product.Name,
       data: {
         id: product.NodeID,
       },
-      capabilities: product.SubType == 1 ? ['windowcoverings_set', 'alarm_raining', 'alarm_running'] : ['windowcoverings_set', 'alarm_running'],
+      capabilities: ['windowcoverings_set', 'alarm_running'],
     }));
   }
 

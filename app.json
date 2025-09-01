@@ -66,6 +66,146 @@
   "drivers": [
     {
       "name": {
+        "en": "Awning"
+      },
+      "class": "windowcoverings",
+      "connectivity": [
+        "lan"
+      ],
+      "capabilities": [
+        "windowcoverings_set",
+        "alarm_running"
+      ],
+      "platforms": [
+        "local"
+      ],
+      "pair": [
+        {
+          "id": "list_my_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_my_devices"
+          }
+        },
+        {
+          "id": "add_my_devices",
+          "template": "add_devices"
+        }
+      ],
+      "images": {
+        "small": "/drivers/awning/assets/images/small.png",
+        "large": "/drivers/awning/assets/images/large.png",
+        "xlarge": "/drivers/awning/assets/images/xlarge.png"
+      },
+      "id": "awning"
+    },
+    {
+      "name": {
+        "en": "Garage Opener"
+      },
+      "class": "windowcoverings",
+      "connectivity": [
+        "lan"
+      ],
+      "capabilities": [
+        "windowcoverings_set",
+        "alarm_running"
+      ],
+      "platforms": [
+        "local"
+      ],
+      "pair": [
+        {
+          "id": "list_my_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_my_devices"
+          }
+        },
+        {
+          "id": "add_my_devices",
+          "template": "add_devices"
+        }
+      ],
+      "images": {
+        "small": "/drivers/garageopener/assets/images/small.png",
+        "large": "/drivers/garageopener/assets/images/large.png",
+        "xlarge": "/drivers/garageopener/assets/images/xlarge.png"
+      },
+      "id": "garageopener"
+    },
+    {
+      "name": {
+        "en": "Roller Shutter"
+      },
+      "class": "windowcoverings",
+      "connectivity": [
+        "lan"
+      ],
+      "capabilities": [
+        "windowcoverings_set",
+        "alarm_running"
+      ],
+      "platforms": [
+        "local"
+      ],
+      "pair": [
+        {
+          "id": "list_my_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_my_devices"
+          }
+        },
+        {
+          "id": "add_my_devices",
+          "template": "add_devices"
+        }
+      ],
+      "images": {
+        "small": "/drivers/rollershutter/assets/images/small.png",
+        "large": "/drivers/rollershutter/assets/images/large.png",
+        "xlarge": "/drivers/rollershutter/assets/images/xlarge.png"
+      },
+      "id": "rollershutter"
+    },
+    {
+      "name": {
+        "en": "Venetian Blind"
+      },
+      "class": "windowcoverings",
+      "connectivity": [
+        "lan"
+      ],
+      "capabilities": [
+        "windowcoverings_set",
+        "alarm_running"
+      ],
+      "platforms": [
+        "local"
+      ],
+      "pair": [
+        {
+          "id": "list_my_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_my_devices"
+          }
+        },
+        {
+          "id": "add_my_devices",
+          "template": "add_devices"
+        }
+      ],
+      "images": {
+        "small": "/drivers/venetianblind/assets/images/small.png",
+        "large": "/drivers/venetianblind/assets/images/large.png",
+        "xlarge": "/drivers/venetianblind/assets/images/xlarge.png"
+      },
+      "id": "venetianblind"
+    },
+    {
+      "name": {
         "en": "Window"
       },
       "class": "windowcoverings",

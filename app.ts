@@ -2,6 +2,7 @@
 
 import Homey from 'homey';
 import VeluxHandler from './VeluxHandler';
+
 const { Log } = require('homey-log');
 
 module.exports = class VeluxApp extends Homey.App {
@@ -27,4 +28,4 @@ module.exports = class VeluxApp extends Homey.App {
     this.log('VeluxApp is being uninitialized');
     await this.veluxHandler?.stop();
   }
-}
+};
