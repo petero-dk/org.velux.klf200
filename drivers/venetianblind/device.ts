@@ -7,4 +7,8 @@ module.exports = class VenetianBlindDevice extends VeluxDevice {
     this.supportsRainSensor = false;
     await super.onInit();
   }
+
+  /*
+  Internal Venetian blinds, Exterior Venetian blind and Louver blind slat angle is set by FP3.
+  */
 };

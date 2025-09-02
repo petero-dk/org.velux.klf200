@@ -7,4 +7,7 @@ module.exports = class GarageOpenerDevice extends VeluxDevice {
     this.supportsRainSensor = false;
     await super.onInit();
   }
+  /*
+  FP1 Speed of opener
+  */
 };

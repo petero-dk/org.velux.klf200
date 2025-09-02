@@ -29,7 +29,7 @@ export default class VeluxDriver extends Homey.Driver {
     }
     // Ensure products are loaded
     if (!veluxHandler.products) {
-      await veluxHandler.connect();
+      await veluxHandler.connect().catch(this.error);
     }
     return veluxHandler.products.Products.filter((product: Product) => product.TypeID === this.actuatorType).map((product: Product) => ({
       name: product.Name,
