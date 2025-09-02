@@ -1,6 +1,6 @@
 {
   "id": "org.velux.klf200",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "compatibility": ">=12.4.0",
   "sdk": 3,
   "platforms": [
@@ -34,7 +34,7 @@
   "bugs": {
     "url": "https://github.com/petero-dk/org.velux.klf200/issues"
   },
-  "brandColor" : "#ee0000",
+  "brandColor": "#ee0000",
   "homeyCommunityTopicId": 142411,
   "source": "https://github.com/petero-dk/org.velux.klf200",
   "support": "https://community.homey.app/t/app-pro-velux-via-klf-200/142411"
