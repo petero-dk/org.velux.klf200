@@ -1,7 +1,10 @@
 import VeluxDevice from '../../lib/VeluxDevice';
 
 module.exports = class WindowOpenerDevice extends VeluxDevice {
-  constructor() {
-    super('Window', true);
+
+  async onInit() {
+    this.deviceTypeName = 'Window';
+    this.supportsRainSensor = true;
+    await super.onInit();
   }
 };

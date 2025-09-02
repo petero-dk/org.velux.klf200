@@ -1,7 +1,10 @@
+
 import VeluxDevice from '../../lib/VeluxDevice';
 
 module.exports = class RollerShutterDevice extends VeluxDevice {
-  constructor() {
-    super('RollerShutter');
+  async onInit() {
+    this.deviceTypeName = 'RollerShutter';
+    this.supportsRainSensor = false;
+    await super.onInit();
   }
 };

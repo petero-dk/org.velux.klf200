@@ -4,16 +4,10 @@ import { Product, ActuatorType } from 'klf-200-api';
 const VeluxApp = require('../app');
 
 export default class VeluxDriver extends Homey.Driver {
-  private deviceTypeName: string;
-  private actuatorType: ActuatorType;
-  private supportsRainSensor: boolean;
+  public deviceTypeName: string | null = null;
+  public actuatorType: ActuatorType | null = null;
+  public supportsRainSensor: boolean = false;
 
-  constructor(deviceTypeName: string, actuatorType: ActuatorType, supportsRainSensor: boolean = false) {
-    super();
-    this.deviceTypeName = deviceTypeName;
-    this.actuatorType = actuatorType;
-    this.supportsRainSensor = supportsRainSensor;
-  }
 
   /**
    * onInit is called when the driver is initialized.
@@ -29,15 +23,15 @@ export default class VeluxDriver extends Homey.Driver {
   async onPairListDevices() {
     this.log(`${this.deviceTypeName} onPairListDevices called`);
     const app = this.homey.app as InstanceType<typeof VeluxApp>;
-    const { veluxHandler } = app;
+    const veluxHandler = app.veluxHandler;
     if (!veluxHandler) {
       throw new Error('VeluxHandler not initialized');
     }
     // Ensure products are loaded
-    if (!(veluxHandler as unknown)['products']) {
+    if (!veluxHandler.products) {
       await veluxHandler.connect();
     }
-    return (veluxHandler as unknown)['products'].Products.filter((product: Product) => product.TypeID === this.actuatorType).map((product: Product) => ({
+    return veluxHandler.products.Products.filter((product: Product) => product.TypeID === this.actuatorType).map((product: Product) => ({
       name: product.Name,
       data: {
         id: product.NodeID,

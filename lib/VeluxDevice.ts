@@ -4,16 +4,10 @@ import { Product, RunStatus, StatusReply } from 'klf-200-api';
 const VeluxApp = require('../app');
 
 export default class VeluxDevice extends Homey.Device {
-  private deviceTypeName: string;
-  private supportsRainSensor: boolean;
+  public deviceTypeName: string | null = null;
+  public supportsRainSensor: boolean = false;
   private product: Product | undefined;
   private tempPosition: number | undefined;
-
-  constructor(deviceTypeName: string, supportsRainSensor: boolean = false) {
-    super();
-    this.deviceTypeName = deviceTypeName;
-    this.supportsRainSensor = supportsRainSensor;
-  }
 
   /**
    * onInit is called when the device is initialized.
