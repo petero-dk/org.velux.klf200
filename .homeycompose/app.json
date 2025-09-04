@@ -10,7 +10,7 @@
     "en": "Velux via KLF 200"
   },
   "description": {
-    "en": "Adds support for Velux devices through io-homecontrol and KLF-200"
+  "en": "Effortless control your Velux/io-homecontrol windows, blinds, and shutters via the KLF-200 gateway"
   },
   "category": [
     "climate"
