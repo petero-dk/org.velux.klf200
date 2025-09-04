@@ -1,6 +1,6 @@
 {
   "id": "org.velux.klf200",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "compatibility": ">=12.4.0",
   "sdk": 3,
   "platforms": [
@@ -10,7 +10,7 @@
     "en": "Velux via KLF 200"
   },
   "description": {
-    "en": "Adds support for Velux devices through io-homecontrol and KLF-200"
+    "en": "Effortless control your Velux/io-homecontrol windows, blinds, and shutters via the KLF-200 gateway"
   },
   "category": [
     "climate"
@@ -34,7 +34,7 @@
   "bugs": {
     "url": "https://github.com/petero-dk/org.velux.klf200/issues"
   },
-  "brandColor" : "#ee0000",
+  "brandColor": "#ee0000",
   "homeyCommunityTopicId": 142411,
   "source": "https://github.com/petero-dk/org.velux.klf200",
   "support": "https://community.homey.app/t/app-pro-velux-via-klf-200/142411"

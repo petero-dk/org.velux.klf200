@@ -29,7 +29,7 @@ class VeluxHandler {
       if (!address || !password) throw new Error('Missing Velux controller settings');
       this.conn = new Connection(address);
       try {
-        await this.conn.loginAsync(password, 5);
+        await this.conn.loginAsync(password, 5).catch(this.app.error);
         this.conn?.startKeepAlive();
         this.app.log('Velux connected');
       } catch (err) {
@@ -42,13 +42,17 @@ class VeluxHandler {
         this.app.log('Velux connection error', error);
         await connectionLostTrigger.trigger();
       });
+      try {
       this.products = await Products.createProductsAsync(this.conn);
+      } catch (error) {
+        this.app.error('Failed to create products', error);
+      }
     }
 
     async stop() {
       this.app.log('Velux stopping');
       this.conn?.stopKeepAlive();
-      await this.conn?.logoutAsync();
+      await this.conn?.logoutAsync().catch(this.app.error);
     }
 
     getProductByNodeID(nodeID: number): Product | undefined {

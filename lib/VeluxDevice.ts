@@ -63,7 +63,7 @@ export default class VeluxDevice extends Homey.Device {
 
     this.registerCapabilityListener('windowcoverings_set', async (value) => {
       this.log('Setting value', 'windowcoverings_set', value);
-      await this.product?.setTargetPositionAsync(value as number);
+      await this.product?.setTargetPositionAsync(value as number).catch(this.error);
     });
   }
 
