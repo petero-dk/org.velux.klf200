@@ -4,5 +4,8 @@
   },
   "1.0.1": {
     "en": "Added awning, blinds and rollershutters as devices (untested)"
+  },
+  "1.0.2": {
+    "en": "Updated app icons and description"
   }
 }

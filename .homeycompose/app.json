@@ -1,6 +1,6 @@
 {
   "id": "org.velux.klf200",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "compatibility": ">=12.4.0",
   "sdk": 3,
   "platforms": [
@@ -10,7 +10,7 @@
     "en": "Velux via KLF 200"
   },
   "description": {
-  "en": "Effortless control your Velux/io-homecontrol windows, blinds, and shutters via the KLF-200 gateway"
+    "en": "Effortless control your Velux/io-homecontrol windows, blinds, and shutters via the KLF-200 gateway"
   },
   "category": [
     "climate"
