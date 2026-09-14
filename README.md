@@ -1,0 +1,40 @@
+
+# Velux Homey App - Developer Guide
+
+This repository contains the source code for the Velux Homey app, which integrates Velux io-homecontrol devices with Homey via the KLF-200 gateway.
+
+## What this fork changes (v1.2.0)
+
+This fork of [petero-dk/org.velux.klf200](https://github.com/petero-dk/org.velux.klf200) fixes three problems with device positions and the gateway connection.
+
+**Positions were inverted on most device types.** The app never converted between the Velux position scale and Homey's. `klf-200-api` reports the fraction *closed* for every actuator type except window openers, lights, switches, ventilation points and exterior heating, while Homey's `windowcoverings_set` is always 1 = open. Roller shutters, venetian blinds, awnings and garage openers were therefore reversed in both directions — reading the position and setting it. Conversion now happens in both directions, keyed on the actuator type.
+
+**Sliders were empty and could not be dragged.** The gateway reports `0xF7FF` for an unknown position, which converted to `NaN` and was rejected by Homey, so the capability stayed unset. Unknown positions are now guarded against, the position is seeded when a device binds, and the gateway is asked to refresh the node so the slider starts with a real value. Because the gateway only remembers a position for products it has seen move since its own last restart, the app also calls `Products.requestStatusAsync` after connecting to poll the actuators directly; the answers arrive as ordinary position events.
+
+**A lost connection was terminal.** Nothing retried, and no code path ever called `setAvailable()`, so devices stayed unavailable until the app was restarted by hand. There is now a reconnect loop with exponential backoff, a periodic health check, and rebinding of every device after a reconnect — necessary because `createProductsAsync()` replaces the `Product` instances the devices hold.
+
+Alongside the fixes, position handling is logged in detail: the product's identity and state when a device binds, and for every command the Homey value, the converted Velux value, the raw frame value and the position the move starts from, with the `0xF7FF` unknown marker flagged explicitly. A failed command used to look identical to a successful one from the outside, which made these problems very hard to diagnose.
+
+## Contributing
+We welcome contributions! Please open issues or pull requests for bug fixes, features, or improvements.
+
+### Development Setup
+- Clone this repository
+- Install dependencies with `npm install`
+- Build and test your changes
+- Use the Homey CLI to install and run the app locally
+
+### Code Overview
+- Main app logic: `app.ts`
+- Velux/KLF-200 integration: `VeluxHandler.ts`
+- Device and driver logic: `drivers/windowopener/`
+
+### API & Libraries
+This app uses [klf-200-api](https://github.com/MiSchroe/klf-200-api) for communication with the Velux KLF-200 gateway.
+
+### Icons
+- The Venetian Blind icon is _blinds_ by Thales Muller from [Noun Project](https://thenounproject.com/browse/icons/term/blinds/) (CC BY 3.0)
+- The GarageOpener icon is _Garage_ by Adrien Coquet from [Noun Project](https://thenounproject.com/browse/icons/term/garage/) (CC BY 3.0)
+
+## License
+See LICENSE for details.
